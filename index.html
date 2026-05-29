@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tristan — Archive</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #090909;
+      color: #f2f2f2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #d0d0d0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #8c8c8c;
+      transition: 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+      padding: 70px 0;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      line-height: 0.95;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-text p {
+      color: #9c9c9c;
+      font-size: 1.05rem;
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #f2f2f2;
+      color: black;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #d4d4d4;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 650px;
+      object-fit: cover;
+      border-radius: 24px;
+      filter: brightness(0.88);
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: #d8d8d8;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7a7a7a;
+      margin-bottom: 30px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #121212;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 22px;
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      filter: brightness(0.9);
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h2 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .card-content p {
+      color: #9c9c9c;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+    }
+
+    .card-content a {
+      text-decoration: none;
+      color: #f2f2f2;
+      font-size: 0.92rem;
+    }
+
+    .film-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .film-grid img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 18px;
+      transition: 0.25s ease;
+      opacity: 0.92;
+    }
+
+    .film-grid img:hover {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 28px 0;
+      color: #707070;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image img {
+        height: 500px;
+      }
+
+      .film-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+
+      .hero-image img {
+        height: 400px;
+      }
+
+      .film-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div class="container">
+
+    <nav>
+      <div class="logo">Tristan</div>
+
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#archive">Archive</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Digital<br>Archive</h1>
+
+        <p>
+          A personal space for creative projects, visual experiments, edits, concepts, and unfinished ideas.
+          Inspired by late-night films, grainy photography, and minimalist design.
+        </p>
+
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#archive" class="btn btn-secondary">Film Stills</a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop" alt="Film still">
+        <div class="caption">35mm archive · personal collection</div>
+      </div>
+    </section>
+
+
+    <section id="projects">
+      <div class="section-title">Projects</div>
+
+      <div class="projects">
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop" alt="Project image">
+
+          <div class="card-content">
+            <h2>Visual Editing</h2>
+            <p>
+              Music edits, cinematic sequences, motion experiments, and montage concepts.
+            </p>
+
+            <a href="#">Open Project →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1200&auto=format&fit=crop" alt="Project image">
+
+          <div class="card-content">
+            <h2>Creative Direction</h2>
+            <p>
+              Moodboards, typography tests, branding concepts, and visual references.
+            </p>
+
+            <a href="#">Open Project →</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200&auto=format&fit=crop" alt="Project image">
+
+          <div class="card-content">
+            <h2>Web Experiments</h2>
+            <p>
+              Early frontend projects, interface concepts, and interactive ideas.
+            </p>
+
+            <a href="#">Open Project →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="archive">
+      <div class="section-title">Film Stills</div>
+
+      <div class="film-grid">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Film still">
+
+        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1200&auto=format&fit=crop" alt="Film still">
+
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="Film still">
+
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop" alt="Film still">
+      </div>
+    </section>
+
+
+    <footer id="contact">
+      Tristan Archive © 2026
+    </footer>
+
+  </div>
+
+</body>
+</html>
